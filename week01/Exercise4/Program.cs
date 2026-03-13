@@ -21,19 +21,42 @@ class Program
 
         } while (userNumber != 0);
 
-        // Core requirements
-        int sum = numbers.Sum();
-        double average = (double)sum / numbers.Count;
-        int max = numbers.Max();
-
+        
+        // Part 1: Compute the sum
+        int sum = 0;
+        foreach (int number in numbers)
+        {
+            sum += number;
+        }
         Console.WriteLine($"The sum is: {sum}");
+
+        // Part 2: Compute the average
+        float average = ((float)sum) / numbers.Count;
         Console.WriteLine($"The average is: {average}");
+
+        // Part 3: Find the max
+        int max = numbers[0];
+        foreach (int number in numbers)
+        {
+            if (number > max)
+            {
+                max = number;
+            }
+        }
         Console.WriteLine($"The largest number is: {max}");
 
-        // Stretch challenges
-        if (numbers.Any(n => n > 0))
+        // Stretch Challenge 1: Find the smallest positive number
+        int smallestPositive = int.MaxValue;
+        foreach (int number in numbers)
         {
-            int smallestPositive = numbers.Where(n => n > 0).Min();
+            if (number > 0 && number < smallestPositive)
+            {
+                smallestPositive = number;
+            }
+        }
+
+        if (smallestPositive != int.MaxValue)
+        {
             Console.WriteLine($"The smallest positive number is: {smallestPositive}");
         }
         else
@@ -41,11 +64,12 @@ class Program
             Console.WriteLine("No positive numbers were entered.");
         }
 
+        // Stretch Challenge 2: Sort the list
         numbers.Sort();
         Console.WriteLine("The sorted list is:");
-        foreach (int num in numbers)
+        foreach (int number in numbers)
         {
-            Console.WriteLine(num);
+            Console.WriteLine(number);
         }
     }
 }
